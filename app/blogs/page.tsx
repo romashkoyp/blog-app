@@ -7,11 +7,11 @@ const Blogs = async ({
 }: {
   searchParams: Promise<{ title?: string }>
 }) => {
-  const blogs = sortBlogsByLikes()
+  const blogs =  await sortBlogsByLikes()
   const title = (await searchParams)?.title?.trim().toLowerCase()
 
   const filteredBlogs = title
-    ? filterBlogsByTitle(title)
+    ? await filterBlogsByTitle(title)
     : blogs
     
   return (

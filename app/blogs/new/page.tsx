@@ -23,6 +23,12 @@ const NewBlog = () => {
             <input type="text" name="content" required />
           </label>
         </div>
+        <div>
+          <label>
+            URL
+            <input type="text" name="url" required />
+          </label>
+        </div>
         <button type="submit">Create</button>
       </form>
     </div>
