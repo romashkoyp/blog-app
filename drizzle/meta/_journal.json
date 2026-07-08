@@ -8,6 +8,20 @@
       "when": 1783410270201,
       "tag": "0000_chilly_hedge_knight",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1783495335679,
+      "tag": "0001_flimsy_felicia_hardy",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1783495576789,
+      "tag": "0002_dapper_cobalt_man",
+      "breakpoints": true
     }
   ]
 }
