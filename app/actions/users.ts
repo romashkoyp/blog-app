@@ -2,8 +2,8 @@
 
 import { redirect } from "next/navigation"
 import bcrypt from "bcryptjs"
-import { db } from "../../db"
-import { users } from "../../db/schema"
+import { db } from "@/db"
+import { users } from "@/db/schema"
 
 export const registerUser = async (formData: FormData) => {
   const username = (formData.get("username") as string)?.trim()

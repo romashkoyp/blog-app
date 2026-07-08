@@ -20,9 +20,6 @@ export const sortBlogsByLikes = async () => {
 }
 
 export const addBlog = async (content: string, author: string, title: string, url: string) => {
-  // const user = await db.query.users.findFirst({
-  //   orderBy: sql`RANDOM()`,
-  // })
   const user = await getCurrentUser()
   if (!user) {
     throw new Error("Not logged in")
