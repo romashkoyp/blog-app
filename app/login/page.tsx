@@ -27,24 +27,28 @@ export default function LoginPage() {
   }
 
   return (
-    <div>
-      <h2>Login</h2>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>
-            Username
-            <input type="text" name="username" required />
-          </label>
-        </div>
-        <div>
-          <label>
-            Password
-            <input type="password" name="password" required />
-          </label>
-        </div>
-        <button type="submit">Login</button>
-      </form>
+    <div className="flex flex-col items-center my-30">
+      <div className="flex flex-col items-center justify-center bg-gray-100 pt-10 pb-10 rounded-md w-1/2">
+        <h2 className="text-2xl font-bold mb-4 text-black">Login</h2>
+        {error && <p style={{ color: "red" }}>{error}</p>}
+        <form onSubmit={handleSubmit} className="flex flex-col gap-6 p-4 rounded-md">
+          <div className="flex flex-row">
+            <label className="text-black min-w-50">
+              Username
+              <input className="border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500" type="text" name="username" required />
+            </label>
+          </div>
+          <div className="flex flex-col gap-5">
+            <label className="text-black min-w-50">
+              Password
+              <input className="border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500" type="password" name="password" required />
+            </label>
+          </div>
+          <button type="submit" className="bg-amber-800 hover:bg-amber-700 text-white font-bold py-2 px-4 rounded-md hover:shadow-lg transition duration-300 cursor-pointer">
+            Login
+          </button>
+        </form>
+      </div>
     </div>
   )
 }

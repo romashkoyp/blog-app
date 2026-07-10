@@ -1,3 +1,4 @@
+import "./globals.css"
 import Link from "next/link"
 import AuthSessionProvider from "./components/SessionProvider"
 import { NotificationProvider } from "./components/NotificationContext"
@@ -11,7 +12,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body className="min-h-screen">
         <AuthSessionProvider>
           <NotificationProvider>
             <NavBar />

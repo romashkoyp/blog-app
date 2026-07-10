@@ -7,25 +7,31 @@ export default function NavBar() {
   const { data: session } = useSession()
 
   return (
-    <nav>
-      <Link href="/">home</Link>
-      {" | "}
-      <Link href="/blogs">blogs</Link>
-      {" | "}
-      <Link href="/users">users</Link>
-      {" | "}
+    <nav className="bg-gray-800 text-white p-4 justify-between flex items-center">
       {session ? (
         <>
-          <Link href="/blogs/new">create new</Link>
-          {" | "}
-          <em>{session.user?.name} logged in</em>{" "}
-          <button onClick={() => signOut()}>logout</button>
+          <div>
+            <Link className="p-4 hover:bg-gray-600 rounded-md" href="/">home</Link>
+            <Link className="p-4 hover:bg-gray-600 rounded-md" href="/blogs">blogs</Link>
+            <Link className="p-4 hover:bg-gray-600 rounded-md" href="/users">users</Link>
+            <Link className="p-4 hover:bg-gray-600 rounded-md" href="/blogs/new">create new</Link>
+          </div>
+          <div>
+            <em>{session.user?.name} logged in</em>{" "}
+            <button className="p-4 hover:bg-gray-600 rounded-md cursor-pointer" onClick={() => signOut()}>
+              logout
+            </button>
+          </div>
         </>
       ) : (
         <>
-          <Link href="/login">login</Link>
-          {" | "}
-          <Link href="/register">register</Link>
+          <div>
+            <Link className="p-4 hover:bg-gray-600 rounded-md" href="/">home</Link>
+          </div>
+          <div>
+            <Link className="p-4 hover:bg-gray-600 rounded-md" href="/login">login</Link>
+            <Link className="p-4 hover:bg-gray-600 rounded-md" href="/register">register</Link>
+          </div>
         </>
       )}
     </nav>
