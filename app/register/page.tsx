@@ -1,11 +1,14 @@
 "use client"
 
 import Link from "next/link" // without this register page will not work
+import { useRouter } from "next/navigation"
 import { registerUser } from "../actions/users"
-import { useActionState } from "react"
+import { useActionState, useEffect } from "react"
+import { useNotification } from "../components/NotificationContext"
 
 const initialState = {
   errors: {},
+  success: false,
   values: {
     username: "",
     name: "",
@@ -16,6 +19,16 @@ const initialState = {
 
 export default function RegisterPage() {
   const [state, formAction] = useActionState(registerUser, initialState)
+  const { showNotification } = useNotification()
+  const router = useRouter()
+
+  useEffect(() => {
+    if (state.success) {
+      showNotification("User registered")
+      router.push("/")
+    }
+  }, [state, showNotification, router])
+
   return (
     <div>
       <h2>Register</h2>

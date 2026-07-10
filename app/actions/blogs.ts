@@ -5,35 +5,39 @@ import { revalidatePath } from "next/cache"
 import { addBlog, likeBlog } from "../services/blogs"
 import { auth } from "@/auth"
 
-export const createBlog = async (prevState: any, formData: FormData) => {
-  const session = await auth()
-  if (!session) {
-    redirect("/login")
-  }
-  const content = formData.get("content") as string
-  const author = formData.get("author") as string
-  const title = formData.get("title") as string
-  const url = formData.get("url") as string
+export const createBlog = async (
+  prevState: { title: string; author: string; url: string; content: string, success?: boolean },
+  formData: FormData) => {
+    const session = await auth()
+    if (!session) {
+      redirect("/login")
+    }
 
-  const errors: { [key: string]: string } = {}
-  if (!title || title.length < 5) {
-    errors.title = "Title must be at least 5 characters"
-  }
-  if (!author || author.length < 5) {
-    errors.author = "Author must be at least 5 characters"
-  }
-  if (!url || url.length < 5) {
-    errors.url = "URL must be at least 5 characters"
-  }
+    const content = formData.get("content") as string
+    const author = formData.get("author") as string
+    const title = formData.get("title") as string
+    const url = formData.get("url") as string
 
-  if (Object.keys(errors).length > 0) {
-    return { errors, values: { title, author, url, content } }
-  }
+    const errors: { [key: string]: string } = {}
+    if (!title || title.length < 5) {
+      errors.title = "Title must be at least 5 characters"
+    }
+    if (!author || author.length < 5) {
+      errors.author = "Author must be at least 5 characters"
+    }
+    if (!url || url.length < 5) {
+      errors.url = "URL must be at least 5 characters"
+    }
 
-  await addBlog(content, author, title, url)
-  revalidatePath("/blogs")
-  redirect("/blogs")
-}
+    if (Object.keys(errors).length > 0) {
+      return { errors, success: false, values: { title, author, url, content } }
+    }
+
+    await addBlog(content, author, title, url)
+    revalidatePath("/blogs")
+    return { errors: {}, success: true, values: { title, author, url, content } }
+
+  }
 
 export const likeOneBlog = async (formData: FormData) => {
   const id = Number(formData.get("id"))
