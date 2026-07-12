@@ -17,7 +17,7 @@ export default function NavBar() {
             <Link className="p-4 hover:bg-gray-600 rounded-md" href="/blogs/new">create new</Link>
           </div>
           <div>
-            <em>{session.user?.name} logged in</em>{" "}
+            <Link className="p-4 hover:bg-gray-600 rounded-md" href="/me">{session.user?.name}</Link>
             <button className="p-4 hover:bg-gray-600 rounded-md cursor-pointer" onClick={() => signOut()}>
               logout
             </button>
@@ -27,6 +27,8 @@ export default function NavBar() {
         <>
           <div>
             <Link className="p-4 hover:bg-gray-600 rounded-md" href="/">home</Link>
+            <Link className="p-4 hover:bg-gray-600 rounded-md" href="/blogs">blogs</Link>
+            <Link className="p-4 hover:bg-gray-600 rounded-md" href="/users">users</Link>
           </div>
           <div>
             <Link className="p-4 hover:bg-gray-600 rounded-md" href="/login">login</Link>
