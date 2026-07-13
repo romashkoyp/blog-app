@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation"
 import { getBlogById } from "../../services/blogs"
-import { likeOneBlog } from "../../actions/blogs"
+import { likeOneBlog, addBlogToReadingList } from "../../actions/blogs"
 
 const BlogPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params
@@ -21,12 +21,18 @@ const BlogPage = async ({ params }: { params: Promise<{ id: string }> }) => {
             Read more
           </a>
         </p>
-        <div className="mt-6 flex items-center justify-between text-sm text-gray-500">
+        <div className="mt-6 flex items-center justify-evenly text-sm text-gray-500">
           <p>Likes: {blog.likes}</p>
           <form action={likeOneBlog}>
             <input type="hidden" name="id" value={blog.id} />
             <button type="submit" className="rounded-md bg-gray-900 px-4 py-2 font-medium text-white cursor-pointer">
               Like
+            </button>
+          </form>
+          <form action={addBlogToReadingList}>
+            <input type="hidden" name="id" value={blog.id} />
+            <button type="submit" className="rounded-md bg-gray-900 px-4 py-2 font-medium text-white cursor-pointer">
+              Add to reading list
             </button>
           </form>
         </div>
