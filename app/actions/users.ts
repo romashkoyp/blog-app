@@ -3,7 +3,24 @@
 import bcrypt from "bcryptjs"
 import { db } from "@/db"
 import { users } from "@/db/schema"
+import { eq } from "drizzle-orm"
 import { getUserByUsername } from "../services/users"
+import { redirect } from "next/navigation"
+import { getCurrentUser } from "../services/session"
+import { revalidatePath } from "next/cache"
+
+export const generateToken = async () => {
+  const user = await getCurrentUser()
+  if (!user) {
+    redirect("/login")
+  }
+
+  const token = await bcrypt.hash(Date.now().toString(), 10)
+  console.log("Generated token from use server component:", token)
+  await db.update(users).set({ token }).where(eq(users.id, user.id))
+  revalidatePath("/me")
+  return token
+}
 
 export const registerUser = async (
   prevState: { username: string, name: string, password: string, confirmPassword: string, success?: boolean },

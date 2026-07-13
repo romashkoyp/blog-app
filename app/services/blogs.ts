@@ -1,6 +1,6 @@
 import { eq, sql, ilike, desc } from "drizzle-orm"
 import { db } from "../../db"
-import { blogs, users } from "../../db/schema"
+import { blogs } from "../../db/schema"
 import { getCurrentUser } from "./session"
 
 export const getBlogs = async () => {
