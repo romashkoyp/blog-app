@@ -49,4 +49,29 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   session: {
     strategy: "jwt",
   },
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id
+        token.token = user.token
+      }
+
+      // Always fetch the latest token from the database
+      if (token.id) {
+        const dbUser = await db.query.users.findFirst({
+          where: eq(users.id, Number(token.id)),
+          columns: { token: true },
+        })
+        if (dbUser) {
+          token.token = dbUser.token
+        }
+      }
+
+      return token
+    },
+    async session({ session, token }) {
+      session.user.token = token.token as string
+      return session
+    },
+  },
 })

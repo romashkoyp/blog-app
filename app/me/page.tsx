@@ -1,16 +1,18 @@
 "use client"
 
 import Link from "next/link"
-import { notFound } from "next/navigation"
+import { redirect } from "next/navigation"
 import { useSession } from "next-auth/react"
 import { generateToken } from "../actions/users"
 
 export default function UserProfile() {
-  const { data: session, status } = useSession()
+  const { data: session, status, update } = useSession()
+  console.log("Session:", session)
   
   const generateNewToken = async () => {
     const token = await generateToken()
     console.log("Generated token from use client component:", token)
+    await update({ ...session?.user, token }) 
   }
 
   if (status === "loading") {
@@ -18,7 +20,7 @@ export default function UserProfile() {
   }
 
   if (!session) {
-    notFound()
+    redirect("/login")
   }
 
   return (
