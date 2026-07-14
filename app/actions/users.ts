@@ -21,7 +21,11 @@ export const generateToken = async () => {
 }
 
 export const registerUser = async (
-  prevState: { username: string, name: string, password: string, confirmPassword: string, success?: boolean },
+  prevState: {
+    errors: Record<string, string>
+    success: boolean
+    values: { username: string; name: string; password: string; confirmPassword: string }
+  },
   formData: FormData) => {
   const username = (formData.get("username") as string)?.trim()
   const name = (formData.get("name") as string)?.trim()

@@ -6,7 +6,11 @@ import { addBlog, likeBlog, addToReadingList, updateReadingList } from "../servi
 import { auth } from "@/auth"
 
 export const createBlog = async (
-  prevState: { title: string; author: string; url: string; content: string, success?: boolean },
+  prevState: {
+    errors: Record<string, string>
+    success: boolean
+    values: { title: string; author: string; url: string; content: string }
+  },
   formData: FormData) => {
   const session = await auth()
   if (!session) {
