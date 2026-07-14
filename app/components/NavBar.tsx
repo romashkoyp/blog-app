@@ -24,7 +24,7 @@ export default function NavBar() {
             <Link className={getLinkClass("/blogs/new")} href="/blogs/new">create new</Link>
           </div>
           <div>
-            <Link className={getLinkClass("/me")} href="/me">{session.user?.name}</Link>
+            <Link className={getLinkClass("/me")} href="/me">me</Link>
             <button className="p-3 hover:bg-gray-600 rounded-md cursor-pointer" onClick={() => signOut()}>
               logout
             </button>

@@ -25,7 +25,7 @@ export default function RegisterPage() {
   useEffect(() => {
     if (state.success) {
       showNotification("User registered")
-      router.push("/")
+      router.push("/login")
     }
   }, [state, showNotification, router])
 
@@ -37,38 +37,38 @@ export default function RegisterPage() {
           <div className="flex flex-col gap-5">
             <label className="text-black min-w-50">
               Username
-              <input 
-                className="border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full" 
-                type="text" 
-                name="username" 
-                defaultValue={state?.values?.username} 
-                required 
+              <input
+                className="border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full"
+                type="text"
+                name="username"
+                defaultValue={state?.values?.username}
+                required
               />
               {/* @ts-ignore */}
-              {state.errors.username && <p className="text-red-500 mt-1">{state.errors.username}</p>}
+              {state.errors.username && <p data-testid="username-error" className="text-red-500 mt-1">{state.errors.username}</p>}
             </label>
           </div>
           <div className="flex flex-col gap-5">
             <label className="text-black min-w-50">
               Name
-              <input 
-                className="border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full" 
-                type="text" 
-                name="name" 
-                defaultValue={state?.values?.name} 
-                required 
+              <input
+                className="border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full"
+                type="text"
+                name="name"
+                defaultValue={state?.values?.name}
+                required
               />
             </label>
           </div>
           <div className="flex flex-col gap-5">
             <label className="text-black min-w-50">
               Password
-              <input 
-                className="border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full" 
-                type="password" 
-                name="password" 
-                defaultValue={state?.values?.password} 
-                required 
+              <input
+                className="border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full"
+                type="password"
+                name="password"
+                defaultValue={state?.values?.password}
+                required
               />
               {/* @ts-ignore */}
               {state.errors.password && <p className="text-red-500 mt-1">{state.errors.password}</p>}
@@ -76,20 +76,21 @@ export default function RegisterPage() {
           </div>
           <div className="flex flex-col gap-5">
             <label className="text-black min-w-50">
-              Confirm password
-              <input 
-                className="border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full" 
-                type="password" 
-                name="confirmPassword" 
-                defaultValue={state?.values?.confirmPassword} 
-                required 
+              Confirm Password
+              <input
+                className="border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full"
+                type="password"
+                name="confirmPassword"
+                defaultValue={state?.values?.confirmPassword}
+                required
               />
               {/* @ts-ignore */}
-              {state.errors.confirmPassword && <p className="text-red-500 mt-1">{state.errors.confirmPassword}</p>}
+              {state.errors.confirmPassword && <p data-testid="passwordConfirm-error" className="text-red-500 mt-1">{state.errors.confirmPassword}</p>}
             </label>
           </div>
-          <button 
-            type="submit" 
+          <button
+            type="submit"
+            data-testid="register-button"
             className="bg-amber-800 hover:bg-amber-700 text-white font-bold py-2 px-4 rounded-md hover:shadow-lg transition duration-300 cursor-pointer"
           >
             Register

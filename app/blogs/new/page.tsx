@@ -65,7 +65,7 @@ const NewBlog = () => {
             {/* @ts-ignore */}
             {state.errors.url && <p className="mt-1 text-sm text-red-600">{state.errors.url}</p>}
           </div>
-          <button type="submit" className="rounded-md bg-gray-900 px-4 py-2 font-medium text-white cursor-pointer">
+          <button type="submit" data-testid="create-blog-button" className="rounded-md bg-gray-900 px-4 py-2 font-medium text-white cursor-pointer">
             Create
           </button>
         </form>

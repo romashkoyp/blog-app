@@ -22,18 +22,20 @@ const Blogs = async ({
           <input
             type="text"
             name="title"
+            data-testid="filter-input"
             placeholder="Filter by title"
             className="w-48 rounded-md border border-gray-300 px-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:border-gray-400 focus:outline-none"
           />
           <button
             type="submit"
+            data-testid="search-button"
             className="cursor-pointer rounded-md bg-gray-900 px-8 py-2 text-sm font-medium text-white"
           >
             Filter
           </button>
         </form>
       </div>
-      <div className="space-y-4">
+      <div data-testid="blogs-list" className="space-y-4">
         {filteredBlogs.map(blog => (
           <div key={blog.id} className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
             <p className="mb-2 text-lg font-semibold text-gray-900">
@@ -47,7 +49,7 @@ const Blogs = async ({
               <a className="hover:text-gray-700 hover:underline" href={blog.url} target="_blank" rel="noopener noreferrer">
                 Read more
               </a>
-              <p>Likes: {blog.likes}</p>
+              <p>{blog.likes} likes</p>
             </div>
           </div>
         ))}

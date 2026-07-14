@@ -12,10 +12,10 @@ const BlogPage = async ({ params }: { params: Promise<{ id: string }> }) => {
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-8">
-      <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
-        <h2 className="text-2xl font-semibold text-gray-900">{blog.title}</h2>
+      <div data-testid="blog-detail" className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+        <h2 data-testid="blog-title" className="text-2xl font-semibold text-gray-900">{blog.title}</h2>
         <p className="mt-3 text-sm text-gray-700">{blog.content}</p>
-        <p className="mt-4 text-sm text-gray-600">Author: {blog.author}</p>
+        <p data-testid="blog-author" className="mt-4 text-sm text-gray-600">Author: {blog.author}</p>
         <p className="mt-2 text-sm text-gray-600">
           <a className="hover:text-gray-800 hover:underline" href={blog.url} target="_blank" rel="noopener noreferrer">
             Read more
@@ -31,7 +31,7 @@ const BlogPage = async ({ params }: { params: Promise<{ id: string }> }) => {
           </form>
           <form action={addBlogToReadingList}>
             <input type="hidden" name="id" value={blog.id} />
-            <button type="submit" className="rounded-md bg-gray-900 px-4 py-2 font-medium text-white cursor-pointer">
+            <button type="submit" data-testid="add-to-reading-list-button" className="rounded-md bg-gray-900 px-4 py-2 font-medium text-white cursor-pointer">
               Add to reading list
             </button>
           </form>
