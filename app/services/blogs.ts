@@ -1,4 +1,4 @@
-import { eq, sql, ilike, desc } from "drizzle-orm"
+import { eq, sql, ilike, desc, and } from "drizzle-orm"
 import { db } from "../../db"
 import { blogs, readingList } from "../../db/schema"
 import { getCurrentUser } from "./session"
@@ -55,9 +55,31 @@ export const addToReadingList = async (blogId: number) => {
     return
   }
 
-  return db.insert(readingList).values({
-    userId: user.id,
-    blogId,
-    read: false,
+  return db
+    .insert(readingList)
+    .values({
+      userId: user.id,
+      blogId,
+      read: false,
+    })
+}
+
+export const updateReadingList = async (blogId: number) => {
+  const user = await getCurrentUser()
+  if (!user) {
+    throw new Error("Not logged in")
+  }
+
+  const existing = await db.query.readingList.findFirst({
+    where: (rl, { and, eq }) => and(eq(rl.userId, user.id), eq(rl.blogId, blogId)),
   })
+
+  if (existing?.read) {
+    return
+  }
+
+  return db
+    .update(readingList)
+    .set({ read: true })
+    .where(and(eq(readingList.userId, user.id), eq(readingList.blogId, blogId)))
 }

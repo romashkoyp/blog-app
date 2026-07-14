@@ -21,11 +21,11 @@ const BlogPage = async ({ params }: { params: Promise<{ id: string }> }) => {
             Read more
           </a>
         </p>
-        <div className="mt-6 flex items-center justify-evenly text-sm text-gray-500">
-          <p>Likes: {blog.likes}</p>
+        <div className="mt-6 flex items-center text-sm text-gray-500">
+          <p className="pr-4 mr-2">Likes: {blog.likes}</p>
           <form action={likeOneBlog}>
             <input type="hidden" name="id" value={blog.id} />
-            <button type="submit" className="rounded-md bg-gray-900 px-4 py-2 font-medium text-white cursor-pointer">
+            <button type="submit" className="rounded-md bg-gray-900 px-4 py-2 mr-5 font-medium text-white cursor-pointer">
               Like
             </button>
           </form>
