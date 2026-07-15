@@ -351,6 +351,7 @@ test.describe("Blog Application", () => {
 
       // Should show in unread section
       await expect(page.getByTestId("unread-section")).toBeVisible()
+      await page.waitForTimeout(500)
       await expect(page.getByTestId("unread-section")).toContainText(
         "Test Blog",
       )
@@ -461,7 +462,7 @@ test.describe("Blog Application", () => {
       await page.getByTestId("generate-token-button").click()
 
       // Wait for token to potentially change
-      await page.waitForTimeout(500)
+      await page.waitForTimeout(1500)
       const secondToken = await page.getByTestId("api-token").textContent()
 
       // Tokens should be different

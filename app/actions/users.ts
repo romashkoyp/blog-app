@@ -15,7 +15,7 @@ export const generateToken = async () => {
     redirect("/login")
   }
 
-  const token = await bcrypt.hash(Date.now().toString(), 10)
+  const token = crypto.randomUUID()
   await db.update(users).set({ token }).where(eq(users.id, user.id))
   revalidatePath("/me")
 }
